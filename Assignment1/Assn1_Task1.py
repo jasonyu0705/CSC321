@@ -32,7 +32,7 @@ def CBC_Encrypt(key, data , iv):
         encrypted_block= cipher.encrypt(next_in)
         prev_out = encrypted_block
         encrypted_blocks.append(encrypted_block)
-    return b''.join(encrypted_blocks), encrypted_block
+    return b''.join(encrypted_blocks)
     
 def PKCS7_Pad(data, block_size=16):
     padding_length = block_size - (len(data) % block_size)
@@ -53,8 +53,8 @@ def write_bmp(path, header, pixels):
 
 def main():
     
-    header,pixels=read_bmp("Assignment1/cp-logo.bmp")
-    # img2=Image.open("Assignment1/images/mustang.bmp")
+    #header,pixels=read_bmp("Assignment1/cp-logo.bmp")
+    header,pixels=read_bmp("Assignment1/mustang.bmp")
     key = random.randbytes(16)
 
     pixels_out_ECB = ECB_Encrypt(key, pixels)
@@ -62,8 +62,8 @@ def main():
     iv = get_IV()
     pixels_out_CBC = CBC_Encrypt(key, pixels, iv)
     
-    write_bmp("Assignment1/cp-logo.bmp", header,pixels_out_ECB)
-    #write_bmp("Assignment1/cp-logo.bmp", header, pixels_out_CBC)
+    #write_bmp("Assignment1/cp-logo.bmp", header,pixels_out_ECB)
+    write_bmp("Assignment1/mustang.bmp", header, pixels_out_CBC)
     
 
    
