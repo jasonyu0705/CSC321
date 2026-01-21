@@ -28,7 +28,7 @@ def CBC_Encrypt(key, data , iv):
     prev_out = iv
     for block in split_data:
         cipher = AES.new(key, AES.MODE_ECB)
-        next_in = bytes(block ^ prev_out)
+        next_in = bytes(a ^ b for a, b in zip(block, prev_out))
         encrypted_block= cipher.encrypt(next_in)
         prev_out = encrypted_block
         encrypted_blocks.append(encrypted_block)
@@ -53,7 +53,7 @@ def write_bmp(path, header, pixels):
 
 def main():
     
-    header,pixels=read_bmp("Assignment1/images/cp-logo.bmp")
+    header,pixels=read_bmp("Assignment1/cp-logo.bmp")
     # img2=Image.open("Assignment1/images/mustang.bmp")
     key = random.randbytes(16)
 
@@ -62,8 +62,8 @@ def main():
     iv = get_IV()
     pixels_out_CBC = CBC_Encrypt(key, pixels, iv)
     
-    write_bmp("Assignment1/images/cp-logo-ecb.bmp", header,pixels_out_ECB)
-    write_bmp("Assignment1/images/cp-logo-cbc.bmp", header, pixels_out_CBC)
+    write_bmp("Assignment1/cp-logo.bmp", header,pixels_out_ECB)
+    #write_bmp("Assignment1/cp-logo.bmp", header, pixels_out_CBC)
     
 
    
