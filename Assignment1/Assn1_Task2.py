@@ -74,20 +74,25 @@ def verify(encrypted, key, iv):
 def main():
     key = random.randbytes(16)
     iv = get_IV()
-    cypher_text = submit("You're the man now, dog", key, iv)
+    cypher_text = submit("mcijadomjciodjmaosjidcmajsdjcaiosdcmjasoicjdasojcmdjiasmcdjasoicjdaiosjcmdjiamsiodoiacmjdoiajscmoimjacoisjdmoiajsd", key, iv)
 
     # Flip bits to get ";admin=true;" in the decrypted plaintext
 
     block_size = 16
 
+    prepend_str = "userid=456; userdata="
+
     # length of ;admin=true; is 13 bytes
     target = b";admin=true;"
+
     target_length = len(target)
-    prepend_length = len("userid=456; userdata=")
+    prepend_length = len(prepend_str)
 
     offset = prepend_length + (block_size - (prepend_length % block_size))  # start of next block
 
     modified_cypher = bytearray(cypher_text)
+
+    decrypted_og = CBC_Decrypt(key, cypher_text, iv)
 
     # If we flip bits in the previous block, we can control the decrypted bytes of the next block
     for i in range(target_length):
@@ -98,22 +103,38 @@ def main():
         original_byte = cypher_text[prev_block_index * block_size + byte_index_in_block]
         desired_byte = target[i]
 
-        flip_byte = original_byte ^ desired_byte
-        print(f"Flipping byte at index {prev_block_index * block_size + byte_index_in_block} from {hex(original_byte)} to {hex(desired_byte)} using flip byte {hex(flip_byte)}")
+        str_byte = decrypted_og[byte_index] # Assuming that we knew something about the payload
 
-        modified_cypher[prev_block_index * block_size + byte_index_in_block] = flip_byte
+        flip_byte = str_byte ^ desired_byte
 
+        modified_cypher[prev_block_index * block_size + byte_index_in_block] ^= flip_byte
+
+
+    # This could be used if we didn't know anything about the payload
+
+    # decrypted_mod = CBC_Decrypt(key, bytes(modified_cypher), iv)
+
+    # # Pass 2: XOR ciphertext with the result from Pass 1 and desired byte
+    # for i in range(target_length):
+    #     byte_index = offset + i
+    #     byte_index_in_block = byte_index % block_size
+    #     prev_block_index = byte_index // block_size - 1  # previous block
+
+    #     result_byte = decrypted_mod[byte_index]  # What we got from Pass 1
+    #     desired_byte = target[i]
+        
+    #     # Modify ciphertext again: XOR with result and desired byte
+    #     modified_cypher[prev_block_index * block_size + byte_index_in_block] ^= result_byte ^ desired_byte
 
     admin_bool = verify(cypher_text, key, iv)
     admin_bool_mod = verify(bytes(modified_cypher), key, iv)
 
-    decrypted_og = CBC_Decrypt(key, cypher_text, iv)
     decrypted_mod = CBC_Decrypt(key, bytes(modified_cypher), iv)
 
-    print("OG Decrypted text:", bytearray(decrypted_og))
-    print("Modified Decrypted text:", bytearray(decrypted_mod.encode()))
+    print("OG Decrypted text:", decrypted_og)
+    print("Modified Decrypted text:", decrypted_mod)
 
-    print("OG Admin access:", admin_bool)  # Expected: False
+    print("\nOG Admin access:", admin_bool)  # Expected: False
     print("Modified Admin access:", admin_bool_mod)  # Expected: True
     
 if __name__ == "__main__":

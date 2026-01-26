@@ -53,8 +53,8 @@ def write_bmp(path, header, pixels):
 
 def main():
     
-    #header,pixels=read_bmp("Assignment1/cp-logo.bmp")
-    header,pixels=read_bmp("Assignment1/mustang.bmp")
+    header,pixels=read_bmp("Assignment1/cp-logo.bmp")
+    #header,pixels=read_bmp("Assignment1/mustang.bmp")
     key = random.randbytes(16)
 
     pixels_out_ECB = ECB_Encrypt(key, pixels)
@@ -62,7 +62,7 @@ def main():
     iv = get_IV()
     pixels_out_CBC = CBC_Encrypt(key, pixels, iv)
     
-    write_bmp("Assignment1/mustang-out.bmp", header,pixels_out_ECB)
+    write_bmp("Assignment1/cp-logo-out.bmp", header,pixels_out_ECB)
     #write_bmp("Assignment1/mustang-out.bmp", header, pixels_out_CBC)
     
 
