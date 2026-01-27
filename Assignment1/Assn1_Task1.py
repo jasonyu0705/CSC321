@@ -1,5 +1,6 @@
 from Crypto.Cipher import AES
 import random
+import argparse
 
 def read_bmp(path):
     with open(path, "rb") as f:
@@ -52,19 +53,30 @@ def write_bmp(path, header, pixels):
         f.write(header + pixels)
 
 def main():
+    parser = argparse.ArgumentParser(
+        description="Encrypt BMP image using ECB or CBC mode",
+        epilog="Examples:\n"
+               "  python Assn1_Task1.py ECB input.bmp output.bmp\n"
+               "  python Assn1_Task1.py CBC input.bmp output.bmp",
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument("mode", choices=["ECB", "CBC"], help="Encryption mode: ECB or CBC")
+    parser.add_argument("input_file", help="Input BMP file path")
+    parser.add_argument("output_file", help="Output BMP file path")
     
-    header,pixels=read_bmp("Assignment1/cp-logo.bmp")
-    #header,pixels=read_bmp("Assignment1/mustang.bmp")
+    args = parser.parse_args()
+    
+    header, pixels = read_bmp(args.input_file)
     key = random.randbytes(16)
-
-    pixels_out_ECB = ECB_Encrypt(key, pixels)
-
-    iv = get_IV()
-    pixels_out_CBC = CBC_Encrypt(key, pixels, iv)
     
-    write_bmp("Assignment1/cp-logo-out.bmp", header,pixels_out_ECB)
-    #write_bmp("Assignment1/mustang-out.bmp", header, pixels_out_CBC)
+    if args.mode == "ECB":
+        pixels_out = ECB_Encrypt(key, pixels)
+    else:  # CBC
+        iv = get_IV()
+        pixels_out = CBC_Encrypt(key, pixels, iv)
     
+    write_bmp(args.output_file, header, pixels_out)
+    print(f"Encrypted image saved to {args.output_file}")
 
    
 if __name__ == "__main__":
