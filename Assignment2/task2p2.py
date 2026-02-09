@@ -31,7 +31,6 @@ def main():
 
                  
     s_alice = compute(alice_gen_key, alice_priv_key, alice_pub_key)
-    #                       ^ this is the modulus now 
     s_bob = compute(bob_gen_key, bob_priv_key, alice_pub_key)
 
 
@@ -50,6 +49,20 @@ def main():
     print("Bob Ciphertext:", ciphertext_bob.hex())
 
     
+    c0 = AES.new(k_alice, AES.MODE_ECB)
+    c1 = AES.new(k_bob, AES.MODE_ECB)
+    decrypted_message_alice = c0.decrypt(ciphertext_alice).rstrip(b'\x00')
+    decrypted_message_bob = c1.decrypt(ciphertext_bob).rstrip(b'\x00')
+    print("Decrypted Alice's message by Alice:", decrypted_message_alice.decode())
+    print("Decrypted Bob's message by Bob:", decrypted_message_bob.decode())
+
+
+
+
+
+
+
+    #mallory 
     shared_secret = compute(tamperedKey, alice_priv_key, alice_pub_key)
 
     mallory_key = hashlib.sha256(int_to_fixed_bytes(shared_secret, alice_pub_key)).digest()
