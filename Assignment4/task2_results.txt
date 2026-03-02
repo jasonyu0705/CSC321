@@ -1,0 +1,97 @@
+PS C:\Users\dovyd\CSC436\CSC321\Assignment4> py task2.py 
+Loading NLTK words...
+Loaded 135145 words of length 6-10.
+Loaded 15 users from shadow file.
+Starting crack with 28 cores...
+
+--- Cracking user: Bilbo ---
+Hash: $2b$08$J9FW66ZdPI2nrIMcOxFYI.qx268uZn.ajhymLP/YHaAsfBGP3Fnmq
+Workfactor: 08
+SUCCESS! Password for Bilbo is: 'welcome'
+Time taken: 37.37 seconds
+
+--- Cracking user: Gandalf ---
+Hash: $2b$08$J9FW66ZdPI2nrIMcOxFYI.q2PW6mqALUl2/uFvV9OFNPmHGNPa6YC
+Workfactor: 08
+SUCCESS! Password for Gandalf is: 'wizard'
+Time taken: 53.25 seconds
+
+--- Cracking user: Thorin ---
+Hash: $2b$08$J9FW66ZdPI2nrIMcOxFYI.6B7jUcPdnqJz4tIUwKBu8lNMs5NdT9q
+Workfactor: 08
+SUCCESS! Password for Thorin is: 'diamond'
+Time taken: 34.91 seconds
+
+--- Cracking user: Fili ---
+Hash: $2b$09$M9xNRFBDn0pUkPKIVCSBzuwNDDNTMWlvn7lezPr8IwVUsJbys3YZm
+Workfactor: 09
+SUCCESS! Password for Fili is: 'desire'
+Time taken: 52.87 seconds
+
+--- Cracking user: Kili ---
+Hash: $2b$09$M9xNRFBDn0pUkPKIVCSBzuPD2bsU1q8yZPlgSdQXIBILSMCbdE4Im
+Workfactor: 09
+SUCCESS! Password for Kili is: 'ossify'
+Time taken: 115.21 seconds
+
+--- Cracking user: Balin ---
+Hash: $2b$10$xGKjb94iwmlth954hEaw3O3YmtDO/mEFLIO0a0xLK1vL79LA73Gom
+Workfactor: 10
+SUCCESS! Password for Balin is: 'hangout'
+Time taken: 80.18 seconds
+
+--- Cracking user: Dwalin ---
+Hash: $2b$10$xGKjb94iwmlth954hEaw3OFxNMF64erUqDNj6TMMKVDcsETsKK5be
+Workfactor: 10
+SUCCESS! Password for Dwalin is: 'drossy'
+Time taken: 40.32 seconds
+
+--- Cracking user: Oin ---
+Hash: $2b$10$xGKjb94iwmlth954hEaw3OcXR2H2PRHCgo98mjS11UIrVZLKxyABK
+Workfactor: 10
+SUCCESS! Password for Oin is: 'ispaghul'
+Time taken: 241.69 seconds
+
+--- Cracking user: Gloin ---
+Hash: $2b$11$/8UByex2ktrWATZOBLZ0DuAXTQl4mWX1hfSjliCvFfGH7w1tX5/3q
+Workfactor: 11
+SUCCESS! Password for Gloin is: 'oversave'
+Time taken: 145.80 seconds
+
+--- Cracking user: Dori ---
+Hash: $2b$11$/8UByex2ktrWATZOBLZ0Dub5AmZeqtn7kv/3NCWBrDaRCFahGYyiq
+Workfactor: 11
+SUCCESS! Password for Dori is: 'indoxylic'
+Time taken: 239.68 seconds
+
+--- Cracking user: Nori ---
+Hash: $2b$11$/8UByex2ktrWATZOBLZ0DuER3Ee1GdP6f30TVIXoEhvhQDwghaU12
+Workfactor: 11
+SUCCESS! Password for Nori is: 'swagsman'
+Time taken: 105.81 seconds
+
+--- Cracking user: Ori ---
+Hash: $2b$12$rMeWZtAVcGHLEiDNeKCz8OiERmh0dh8AiNcf7ON3O3P0GWTABKh0O
+Workfactor: 12
+SUCCESS! Password for Ori is: 'airway'
+Time taken: 515.07 seconds
+
+--- Cracking user: Bifur ---
+Hash: $2b$12$rMeWZtAVcGHLEiDNeKCz8OMoFL0k33O8Lcq33f6AznAZ/cL1LAOyK
+Workfactor: 12
+SUCCESS! Password for Bifur is: 'corrosible'
+Time taken: 405.52 seconds
+
+--- Cracking user: Bofur ---
+Hash: $2b$12$rMeWZtAVcGHLEiDNeKCz8Ose2KNe821.l2h5eLffzWoP01DlQb72O
+Workfactor: 12
+SUCCESS! Password for Bofur is: 'libellate'
+Time taken: 848.42 seconds
+
+--- Cracking user: Durin ---
+Hash: $2b$13$6ypcazOOkUT/a7EwMuIjH.qbdqmHPDAC9B5c37RT9gEw18BX6FOay
+Workfactor: 13
+SUCCESS! Password for Durin is: 'purrone'
+Time taken: 1443.32 seconds
+
+Total execution time: 4359.41 seconds
